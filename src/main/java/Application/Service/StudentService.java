@@ -58,6 +58,17 @@ public class StudentService {
      * @param classroom a persisted, existing classroom passed into this method
      */
     public void assignClassroomToStudent(long studentId, Classroom classroom){
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+        if(studentOptional.isPresent()){
+              // Get the student object
+        Student student = studentOptional.get();
+
+        // Assign the classroom to the student
+        student.setClassroom(classroom);
+
+        // Save the updated student back to the database
+        studentRepository.save(student);
+        }
 
     }
 
@@ -69,6 +80,11 @@ public class StudentService {
      * @return the Classroom of the student
      */
     public Classroom getClassroomOfStudent(long studentId){
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+        if(studentOptional.isPresent()){
+            Student student = studentOptional.get();
+            return student.getClassroom();
+        }
         return null;
     }
 
@@ -78,7 +94,20 @@ public class StudentService {
      * studentRepository so that the update is sent to the database.
      * @param studentId Id of a persisted, existing student entity
      */
-    public void unassignClassroomOfStudent(long studentId){
-
+    public void unassignClassroomOfStudent(long studentId) {
+        // Fetch the student from the repository
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+    
+        if (studentOptional.isPresent()) {
+            // Get the student object
+            Student student = studentOptional.get();
+    
+            // Unassign the classroom by setting it to null
+            student.setClassroom(null);
+    
+            // Save the updated student back to the database
+            studentRepository.save(student);
+        } 
     }
 }
+

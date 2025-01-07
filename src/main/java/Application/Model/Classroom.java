@@ -42,4 +42,9 @@ public class Classroom {
                 ", room='" + room + '\'' +
                 '}';
     }
+
+    public void removeIf(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeIf'");
+    }
 }
